@@ -1,0 +1,97 @@
+/*
+This sample js snippet shows how to run a simple jasmine test inside jsFiddle.
+
+To make your tests pass, just comment out the line 15, uncomment the line 16 and press ctrl-enter to run the test.
+
+For more info check: http://opensas.wordpress.com/2013/06/23/sharing-you-javascript-ninja-secrets-run-your-jasmine-tests-on-jsfiddle/
+*/
+
+/*
+Assignment: implement the calculator.sum method so that it takes two parameters and returns the sum of them.
+*/
+
+// source code
+var calculator = {
+  //sum: NOT_IMPLEMENTED
+  sum: function(a, b) { return a + b; }
+};
+
+function NotesApplication(author)
+{
+  this.author = author;
+  this.notes = [];
+
+}
+
+ NotesApplication.prototype.create = function(note_content)
+ {
+ if(typeof(note_content) == typeof("you"))
+ 	{
+    if(note_content.trim())
+    {
+      this.notes.push(note_content);
+      return "created";
+    }
+  }
+ }
+
+ NotesApplication.prototype.get = function(note_id)
+  {
+  	if(typeof(note_content) == typeof(0))
+  	{
+      if(note_id < this.notes.length)
+      {
+        return this.notes[note_id];
+      }
+      else
+      {
+        return "The id is out of range."
+      }
+  	}
+  	else
+  	{
+  		return "That type is invalid. index has to be an integer value, try again.";
+  	}
+  }
+
+describe("THe NotesApp ", function()
+{
+
+var z = new NotesApplication("Abisoye");
+
+it("should have an author", function(){
+expect(z.author).toBeDefined();
+});
+
+it("should have an author with a string name", function(){
+expect(typeof z.author).toBe(typeof "string");
+});
+
+it("should have a string value", function{
+expect(z.create("A first test")).toBe("created");
+});
+
+
+});
+
+// specs code
+describe("calculator", function() {
+
+  it("sum method should be implemented", function() {
+    expect(calculator.sum).toBeDefined();
+  });
+
+  it("sum method should sum values", function() {
+    expect(calculator.sum(1,2)).toEqual(3);
+  });
+
+});
+
+var NOT_IMPLEMENTED = undefined;
+
+// load jasmine htmlReporter
+(function() {
+  var env = jasmine.getEnv();
+  env.addReporter(new jasmine.HtmlReporter());
+  env.execute();
+}());
