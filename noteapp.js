@@ -9,7 +9,13 @@ function NotesApplication(author)
  {
  	if(typeof(note_content) == typeof("you"))
  	{
-    this.notes.push(note_content);
+    if(!note_content.trim())
+    {
+      this.notes.push(note_content);
+    }
+    else {
+      return "You can't input an empty string. Please try again";
+    }
  	}
  	else
  	{
@@ -33,12 +39,20 @@ function NotesApplication(author)
   {
   	if(typeof(note_content) == typeof(0))
   	{
-    return this.notes[note_id];
+      if(note_id < this.notes.length)
+      {
+        return this.notes[note_id];
+      }
+      else
+      {
+        return "The id is out of range."
+      }
   	}
   	else
   	{
-  		return "That type is invalid. index hs to be an integer value, try again.";
+  		return "That type is invalid. index has to be an integer value, try again.";
   	}
+
   }
 
   NotesApplication.prototype.search =  function(search_text)
@@ -52,7 +66,7 @@ function NotesApplication(author)
 
     for(i = 0; i < this.notes.length; i++)
     {
-      if(this.notes[i].indexOf(search_text) != -1)
+      if(this.notes[i].toLowerCase().indexOf(search_text.toLowerCase()) != -1)
       {
         console.log("NOTE ID: " + i);
         console.log(this.notes[i]);
@@ -72,7 +86,14 @@ function NotesApplication(author)
   {
   	if(typeof(note_content) == typeof(0))
   	{
-    this.notes.splice(note_id, 1);
+      if(note_id < this.notes.length)
+      {
+        this.notes.splice(note_id, 1);
+      }
+      else
+      {
+        return "The id is out of range."
+      }
   	}
   	else
   	{
@@ -82,13 +103,26 @@ function NotesApplication(author)
 
   NotesApplication.prototype.edit = function(note_id, new_content)
   {
-  	if(typeof(new_content) == typeof("you") && typeof(note_id) == typeof(0))
+  	if(typeof(new_content) == typeof("you"))
   	{
-    this.notes[note_id] = new_content;
-    console.log(this.notes[note_id]);
+      if(typeof(note_id) == typeof(0))
+      {
+      if(note_id < this.notes.length)
+      {
+        this.notes[note_id] = new_content;
+        console.log(this.notes[note_id]);
+      }
+      else
+      {
+        return "The id is out of range."
+      }
+      }
+      else {
+        return "The id should be an integer";
+      }
   	}
   	else
   	{
-  		return "That first argument should be integer, the second argument should be a string";
+  		return "That content should be a string";
   	}
   }
