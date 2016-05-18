@@ -9,7 +9,7 @@ function NotesApplication(author)
  {
  	if(typeof(note_content) == typeof("you"))
  	{
-    if(!note_content.trim())
+    if(note_content.trim())
     {
       this.notes.push(note_content);
     }
