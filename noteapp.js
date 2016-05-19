@@ -12,8 +12,10 @@ function NotesApplication(author)
     if(note_content.trim())
     {
       this.notes.push(note_content);
+      return "created successfully";
     }
-    else {
+    else
+    {
       return "You can't input an empty string. Please try again";
     }
  	}
@@ -52,7 +54,6 @@ function NotesApplication(author)
   	{
   		return "That type is invalid. index has to be an integer value, try again.";
   	}
-
   }
 
   NotesApplication.prototype.search =  function(search_text)
