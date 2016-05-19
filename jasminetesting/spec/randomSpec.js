@@ -11,57 +11,109 @@ it("input is not a number", function(){
   expect(typeof z.author).toBe(typeof "string");
 });
 
+it("input cannot be empty", function(){
+  expect(z.author.length).toBeGreaterThan(0);
+});
+
   describe("create", function(){
-    it("should only be a string", function(){
+    it("input successful.", function(){
   expect(z.create("This note is first.")).toBe("created");
 });
+
+it("input should be a string", function(){
+expect(z.create(0)).toBeUndefined();
   });
+
+  it(" cannot create an empty note", function(){
+  expect(z.create()).toBeUndefined();
+    });
+
+});
 
   describe("search", function(){
     z.create("First time");
     z.create("Second time");
-    it("search text should be a string", function(){
+    it("input should exist", function(){
   expect(z.search("time")).toBe(true);
-  expect(z.search(1)).toBeUndefined();
+});
+
+it("input should be a string", function(){
+expect(z.search(1)).toBeUndefined();
+});
+
+it(" function can only take one argument", function(){
+expect(z.search(1, "today")).toBeUndefined();
+});
+
+it("ipnut should not be empty", function(){
   expect(z.search()).toBeUndefined();
 });
+
   });
 
   describe("deletenote", function(){
     z.create("First time");
     z.create("Second time");
-    it("the deleted note at index should exists", function(){
+    it(" input should be an existing index", function(){
   expect(z.deletenote(0)).toBe(true);
-  expect(z.deletenote("today")).toBe(false);
 });
+
+it(" input should be an integer", function(){
+expect(z.deletenote("today")).toBe(false);
+});
+
+it(" input should be defined", function(){
+  expect(z.deletenote()).toBe(false);
+});
+
   });
 
   describe("get", function(){
     z.create("First time");
     z.create("Second time");
-    it(" has to get a note with an index that exists", function(){
+    it(" input should get note at the index.", function(){
       expect(z.get(0)).toBe(true);
+    });
+
+    it(" input should be an integer", function(){
       expect(z.get("talk")).toBe(false);
+    });
+
+    it(" input should be defined", function(){
+      expect(z.get()).toBe(false);
     });
   });
 
     describe("edit", function(){
       z.create("First time");
       z.create("Second time");
-      it("content to update should be a string", function(){
-    expect(z.edit(0, "time to edit.")).toBe(true);
-    expect(z.edit("time to edit.")).toBe(false);
-    expect(z.edit(1)).toBe(false);
+      it(" input should be defined", function(){
     expect(z.edit()).toBe(false);
+    expect(z.edit()).toBeDefined();
   });
+
+  it(" input should update note at index.", function(){
+    expect(z.edit(0, "time to edit.")).toBe(true);
+  });
+
+  it(" input is missing index.", function(){
+    expect(z.edit("time to edit.")).toBe(false);
+  });
+
+  it(" function contains only 2 arguments.", function(){
+    expect(z.edit("time to edit.", 8, 9, "gh")).toBe(false);
+    expect(z.edit(1)).toBe(false);
+  });
+
     });
 
     describe("listNotes", function(){
       z.create("First time");
       z.create("Second time");
       z.create("Third time");
-      it("there are no notes to list", function(){
+      it("There are no notes to display", function(){
         expect(z.listNotes()).toBe(true);
+        expect(z.listNotes()).toBeDefined();
       });
     });
 
